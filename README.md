@@ -28,7 +28,7 @@ cd <repository_directory>
 اجرای اسکریپت:
 
 ```bash
-python theme_downloader.py
+python script.py
 ```
 وارد کردن نام قالب:
 هنگامی که درخواست شد، نام قالب وردپرسی که می‌خواهید جستجو کنید را وارد کنید. برای مثال:
