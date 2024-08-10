@@ -22,8 +22,8 @@ pip install requests beautifulsoup4 colorama
 کلون کردن ریپازیتوری:
 
 ```bash
-git clone <repository_url>
-cd <repository_directory>
+git clone https://github.com/Salarlotfi1381/download-free-paid-wordpress-templates.git
+cd download-free-paid-wordpress-templates
 ```
 اجرای اسکریپت:
 
