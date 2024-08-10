@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import time
 import os
+from urllib.parse import urlparse
 from colorama import Fore, Style, init
 
 # Initialize colorama
@@ -84,15 +85,23 @@ def check_links(links):
     return valid_links
 
 def download_file(url):
-    """Download the file from the given URL."""
+    """Download the file from the given URL and rename it based on the domain."""
     local_filename = url.split('/')[-1]
+    
+    # Extract the domain from the URL
+    domain = urlparse(url).netloc
+    
+    # Create the new filename with the domain included
+    name, ext = os.path.splitext(local_filename)
+    new_filename = f"{name}[{domain}]{ext}"
+    
     try:
         with requests.get(url, stream=True) as r:
             r.raise_for_status()
-            with open(local_filename, 'wb') as f:
+            with open(new_filename, 'wb') as f:
                 for chunk in r.iter_content(chunk_size=8192): 
                     f.write(chunk)
-        print(Fore.GREEN + f"Successfully downloaded: {local_filename}")
+        print(Fore.GREEN + f"Successfully downloaded: {new_filename}")
     except requests.HTTPError:
         print(Fore.RED + f"Failed to download: {url}")
         return False
@@ -159,4 +168,3 @@ if __name__ == "__main__":
             print(Fore.RED + "No links found in the search results.")
     else:
         print(Fore.RED + "Failed to fetch HTML content.")
-
